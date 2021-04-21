@@ -1,0 +1,29 @@
+.editing {
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  padding: .75rem;
+  margin: 0;
+}
+
+.view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: .75rem;
+  margin: 0;
+  width: 100%;
+  span {
+    border: 1px solid black;
+    padding: 5px
+  }
+}
+
+.view-none {
+  display: none;
+}
+
+.editing-none {
+  display: none;
+}
