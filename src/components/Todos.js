@@ -47,6 +47,23 @@ const Todos = () => {
     })
   }
 
+  const editTodoHandler = (todo, todoId) => {
+    setIsLoading(true)
+    fetch(`https://todo-list-gatsby-default-rtdb.europe-west1.firebasedatabase.app/todos/${todoId}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(todo),
+      headers: { 'Content-Type': 'application/json'}
+    }).then(response => {
+      return response.json()
+    }).then(responseData => {
+      setUserTodos(prevTodos => [
+        ...prevTodos,
+        {...todo}
+      ])
+      setIsLoading(false)
+    })
+  }
+
   const removeTodoHandler = useCallback(todoId => {
     fetch(`https://todo-list-gatsby-default-rtdb.europe-west1.firebasedatabase.app/todos/${todoId}.json`, {
       method: 'DELETE'
@@ -69,7 +86,8 @@ const Todos = () => {
     return (
       <TodoList
         todos={userTodos}
-        onRemoveTodo={removeTodoHandler}  
+        onRemoveTodo={removeTodoHandler}
+        onEditTodo={editTodoHandler}  
       />
     )
   }, [userTodos, removeTodoHandler])

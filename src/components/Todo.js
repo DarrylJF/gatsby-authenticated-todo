@@ -8,7 +8,7 @@ import {
   editingNone
 } from '../styles/Todo.module.scss'
 
-const TodoItem = ({todo, remove}) => {
+const TodoItem = ({todo, remove, edit}) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState('')
   const [editedTodo, setEditedTodo] = useState('')
@@ -22,16 +22,18 @@ const TodoItem = ({todo, remove}) => {
 
   const isEditingHandler = () => {
     setIsEditing(!isEditing)
-    setEditedName(todo.name)
-    setEditedTodo(todo.todo)
-    setEditedPriority(todo.priority)
   }
 
   const onSubmitHandler = () => {
-    setEditedName(editedName)
-    setEditedTodo(editedTodo)
-    setEditedPriority(editedPriority)
+    // setEditedName(editedName)
+    // setEditedTodo(editedTodo)
+    // setEditedPriority(editedPriority)
     setIsEditing(false)
+    edit({
+      name: editedName,
+      todo: editedTodo,
+      priority: editedPriority
+    }, todo.id)
   }
  
   return (
@@ -47,13 +49,13 @@ const TodoItem = ({todo, remove}) => {
         </div>
         <div className={isEditing ? editing : editingNone}>
           <span>
-            <label>
+            <label >
               Name
               <input type="text" value={editedName} onChange={event => setEditedName(event.target.value)}/>
             </label>
           </span>
           <span>
-            <label>
+            <label >
               Todo
               <input type="text" value={editedTodo} onChange={event => setEditedTodo(event.target.value)}/>
             </label>

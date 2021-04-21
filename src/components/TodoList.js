@@ -4,19 +4,23 @@ import React from 'react'
 
 import TodoItem from './Todo'
 
-const TodoList = ({todos, onRemoveTodo}) => {
+const TodoList = ({todos, onRemoveTodo, onEditTodo}) => {
   
   return (
+    <>
+    <h2>Todo List</h2>
       <ul>
         {todos.map(todo => (
           <section key={todo.id}>
             <TodoItem
               todo={todo}
               remove={onRemoveTodo}
+              edit={onEditTodo}
             />
           </section>
         ))}
       </ul>
+    </>
   )
 }
 
